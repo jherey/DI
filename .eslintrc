@@ -1,0 +1,40 @@
+{
+	"root": true,
+	"plugins": [
+		"security"
+	],
+	"extends": [
+		"plugin:security/recommended",
+		"airbnb-base",
+	],
+	"env": {
+		"node": true
+	},
+	"rules": {
+		"one-var-declaration-per-line": 0,
+		"class-methods-use-this": 0,
+		"detect-no-csrf-before-method-override": 1,
+		"detect-non-literal-fs-filename": 1,
+    "import/newline-after-import": ["error", { "count": 1 }],
+    "import/no-extraneous-dependencies": 0,
+		"valid-jsdoc": [
+			"error",
+			{
+				"requireReturn": true,
+				"requireReturnType": true,
+				"requireParamDescription": false,
+				"requireReturnDescription": true
+			}
+		],
+		"require-jsdoc": [
+			"error",
+			{
+				"require": {
+					"FunctionDeclaration": true,
+					"MethodDefinition": true,
+					"ClassDeclaration": true
+				}
+			}
+		]
+	}
+}

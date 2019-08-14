@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  app:
+    container_name: test_project
+    restart: always
+    env_file: .env
+    environment:
+      - NODE_ENV=$NODE_ENV
+      - PORT=$PORT
+      - DATABASE_URL=$DOCKER_DATABASE_URL
+      - LOG_LABEL=$LOG_LABEL
+      - LOG_LEVEL=$LOG_LEVEL
+      - LOG_FILE=$LOG_FILE
+      - API_PREFIX=$API_PREFIX
+      - REDIS_HOST=$DOCKER_REDIS_HOST
+      - REDIS_PORT=$REDIS_PORT
+    build: .
+    ports:
+      - '80:8080'
+    links:
+      - db
+      - redis
+  db:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - dbdata:/data/db
+    ports:
+      - '27017:27017'
+  redis:
+    image: redis
+    container_name: redis
+    volumes:
+      - redisdata:/data
+volumes:
+  dbdata:
+  redisdata:
