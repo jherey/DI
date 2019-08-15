@@ -3,12 +3,24 @@ import { listModules } from 'awilix';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import morgan from 'morgan';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+});
 
 const createApp = ({ logger, container, config }) => {
   const app = express();
 
   app.get('/status', (req, res) => { res.status(200).end(); });
   app.enable('trust proxy');
+
+  app.use(helmet());
+
+  //  apply to all requests
+  app.use(limiter);
 
   // Enable Cross Origin Resource Sharing to all origins
   app.use(cors());
