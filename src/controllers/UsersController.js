@@ -18,9 +18,10 @@ class UsersController {
    * Retrieves user details
    * @param {object} req
    * @param {object} res
+   * @param {object} next
    *@returns {object} - user
    */
-  async getAUser(req, res) {
+  async getAUser(req, res, next) {
     const { id } = req.params;
 
     try {
@@ -28,7 +29,7 @@ class UsersController {
 
       return res.status(200).json(user);
     } catch (error) {
-      return res.json(error);
+      return next(error);
     }
   }
 
@@ -36,9 +37,10 @@ class UsersController {
    * Retrieves user details
    * @param {object} req
    * @param {object} res
+   * @param {object} next
    *@returns {object} - user
    */
-  async saveUser(req, res) {
+  async saveUser(req, res, next) {
     const options = req.body;
 
     try {
@@ -46,7 +48,7 @@ class UsersController {
 
       return res.status(201).json(newUser);
     } catch (error) {
-      return res.json(error);
+      return next(error);
     }
   }
 }

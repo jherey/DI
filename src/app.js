@@ -5,6 +5,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import handleError from './middleware/handleError';
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -45,6 +46,9 @@ const createApp = ({ logger, container, config }) => {
 
     logger.info(`Mounted ${name} route to ${config.api.prefix}/${name}}`);
   });
+
+  // catch all errors
+  app.use(handleError());
 
   // error handlers
   app.use('*', (req, res, next) => {
