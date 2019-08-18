@@ -1,0 +1,8 @@
+{
+  "watch": [
+    "src",
+    ".env"
+  ],
+  "delay": 250,
+  "exec": "babel-node --inspect src/bin/www.js"
+}

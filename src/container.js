@@ -8,6 +8,7 @@ import createLogger from './logger';
 import connectToDatabase from './db';
 import createApp from './app';
 import Redis from './utils/Redis';
+import Jwt from './utils/Jwt';
 
 const configureContainer = () => {
   // Create IoC container for dependency injection
@@ -48,6 +49,15 @@ const configureContainer = () => {
       .inject(() => ({ container }))
       .singleton(),
     redis: asClass(Redis)
+      .singleton(),
+    jwt: asClass(Jwt)
+      .inject(() => ({
+        privateKey: config.jwt.privateKey,
+        publicKey: config.jwt.publicKey,
+        expiresIn: config.jwt.expiresIn,
+        audience: config.jwt.audience,
+        issuer: config.jwt.issuer,
+      }))
       .singleton(),
   });
 

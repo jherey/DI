@@ -3,3 +3,5 @@ node_modules
 .env
 setup.log
 yarn-error.log
+jwt_rsa_pub.pem
+jwt_rsa.pem

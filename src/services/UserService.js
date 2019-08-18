@@ -8,9 +8,10 @@ class UserService {
    * Creates an instance of UserService.
    * @param {Object} params
    */
-  constructor({ userRepository, redis }) {
+  constructor({ userRepository, redis, jwt }) {
     this.userRepository = userRepository;
     this.redis = redis;
+    this.jwt = jwt;
     autoBind(this);
   }
 
@@ -41,7 +42,11 @@ class UserService {
 
     // save user in Redis
     await this.redis.setObject('id', user.id, user, 86400);
-    return user;
+
+    const { name, age } = user;
+    const token = await this.jwt.sign({ name, age });
+
+    return { token };
   }
 }
 
