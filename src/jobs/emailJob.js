@@ -23,7 +23,7 @@ class EmailJob {
     try {
       const { email, name } = job.attrs.data;
 
-      this.logger.info(`new user email sent, ${email}, ${name}`);
+      this.logger.info(`Welcome email sent to user ${name}, email: ${email}`);
       done();
     } catch (err) {
       this.logger.error(err);

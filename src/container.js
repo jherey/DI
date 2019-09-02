@@ -10,10 +10,14 @@ import createApp from './app';
 import Redis from './utils/Redis';
 import Jwt from './utils/Jwt';
 import agendaFactory from './agenda';
+import createEventEmitter from './eventEmitter';
 
 const configureContainer = () => {
   // Create IoC container for dependency injection
   const container = createContainer();
+
+  // Create event emitter instance
+  const emitter = createEventEmitter();
 
   const url = config.env === 'test'
     ? config.db.test : config.db.dev;
@@ -34,6 +38,7 @@ const configureContainer = () => {
     agenda: asFunction(agendaFactory)
       .inject(() => ({ container }))
       .singleton(),
+    emitter: asValue(emitter),
   });
 
   // Auto-register repositories, controllers and routes

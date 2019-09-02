@@ -46,7 +46,7 @@ class UserService {
     await this.redis.setObject('id', id, user, 86400);
 
     const token = await this.jwt.sign({ name, age });
-    this.agenda.now('send-email', { email, name });
+    this.agenda.now('sendWelcomeEmail', { email, name });
 
     return { token };
   }
