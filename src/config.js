@@ -46,6 +46,11 @@ const config = {
     audience: process.env.JWT_AUDIENCE,
     issuer: process.env.JWT_ISSUER,
   },
+  agenda: {
+    dbCollection: process.env.AGENDA_COLLECTION || 'agendaJobs',
+    poolTime: process.env.AGENDA_POOLTIME || '5 seconds',
+    concurrency: process.env.AGENDA_CONCURRENCY || 20,
+  },
 };
 
 export default config;

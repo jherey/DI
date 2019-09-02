@@ -9,6 +9,7 @@ import connectToDatabase from './db';
 import createApp from './app';
 import Redis from './utils/Redis';
 import Jwt from './utils/Jwt';
+import agendaFactory from './agenda';
 
 const configureContainer = () => {
   // Create IoC container for dependency injection
@@ -29,6 +30,9 @@ const configureContainer = () => {
       .singleton(),
     db: asFunction(connectToDatabase)
       .inject(() => ({ url }))
+      .singleton(),
+    agenda: asFunction(agendaFactory)
+      .inject(() => ({ container }))
       .singleton(),
   });
 

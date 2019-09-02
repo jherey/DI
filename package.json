@@ -17,6 +17,7 @@
     "docker:stop": "docker-compose down"
   },
   "dependencies": {
+    "agenda": "^2.0.2",
     "auto-bind": "^2.1.0",
     "awilix": "^4.2.2",
     "bluebird": "^3.5.5",
